@@ -1,4 +1,4 @@
-# Logsign Unified SecOps Platform Multiple Vulnerabilities Scan and Exploitation
+# Logsign Unified SecOps Platform Nuclei Template Scanner
 
 ## Explanation:
 
