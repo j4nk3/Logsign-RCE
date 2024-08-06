@@ -1,0 +1,2 @@
+# CVE-2024-5716
+CVE-2024-5716 Nuclei Template
