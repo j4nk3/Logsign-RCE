@@ -38,14 +38,17 @@ cd CVE-2024-5716
 ```
 ### Scanning with Nuclei:
 
-#### Single Target:
+**Single Target:**
+```sh
 nuclei -u https://target.com -t CVE-2024-5716.yaml -nh
-
-#### Multiple Target:
+```
+**Multiple Target:**
+```sh
 nuclei -l urls.txt -t CVE-2024-5716.yaml -nh
+```
 
 ## References
-[Logsign Support](https://support.logsign.net/hc/en-us/articles/19316621924754-03-06-2024-Version-6-4-8-Release-Notes)
+[Logsign Support](https://support.logsign.net/hc/en-us/articles/19316621924754-03-06-2024-Version-6-4-8-Release-Notes)<br>
 [Zero Day Inititive](https://www.zerodayinitiative.com/blog/2024/7/1/getting-unauthenticated-remote-code-execution-on-the-logsign-unified-secops-platform)
 
 Many thanks to @mdisec (Mehmet Ince) for the security research and critical finding detections performed on this product.
