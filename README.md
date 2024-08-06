@@ -21,18 +21,18 @@ To use these template with Nuclei, follow the example steps below:
 ### Clone the repository:
 
 ```sh
-git clone https://github.com/j4nk3/CVE-2024-5716.git
-cd CVE-2024-5716
+git clone https://github.com/j4nk3/logsign-unauth-rce.git
+cd logsign-unauth-rce
 ```
 ### Scanning with Nuclei:
 
 **Single Target:**
 ```sh
-nuclei -u https://target.com -t CVE-2024-5716.yaml -nh
+nuclei -u https://target.com -t logsign-unauth-rce.yaml -nh
 ```
 **Multiple Target:**
 ```sh
-nuclei -l urls.txt -t CVE-2024-5716.yaml -nh
+nuclei -l urls.txt -t logsign-unauth-rce.yaml -nh
 ```
 
 Many thanks to @mdisec (Mehmet Ince) for the security research and critical finding detections performed on this product.
