@@ -39,6 +39,8 @@ cd CVE-2024-5716
 [Logsign Support](https://support.logsign.net/hc/en-us/articles/19316621924754-03-06-2024-Version-6-4-8-Release-Notes)
 [Zero Day Inititive](https://www.zerodayinitiative.com/blog/2024/7/1/getting-unauthenticated-remote-code-execution-on-the-logsign-unified-secops-platform)
 
+Bu üründe gerçekleştirilen güvenlik araştırmacılığı ve kritik bulgu tespitleri için [@mdisec](https://github.com/mdisec) (Mehmet İnce) çok çok teşekkürler.
+
 ### Contributing
 Feel free to submit issues or pull requests if you find any bugs or have suggestions for improvements.
 
