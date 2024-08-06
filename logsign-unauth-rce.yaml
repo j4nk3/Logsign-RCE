@@ -1,4 +1,4 @@
-id: logsign-rce
+id: logsign-unauth-rce
 info:
   name: Logsign Multiple Remote Code Execution and Authentication Bypass Vulnerabilities
   author: Janke
