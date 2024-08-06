@@ -14,18 +14,6 @@ This repository contains Nuclei template for detecting multiple vulnerabilities 
 
 The metasploit exploit phase will be updated...
 
-## Nuclei Template
-
-There is one nuclei template yaml file that can detect the security vulnerability in the repo here. With Nuclei automation, you can detect logsign products with critical security vulnerabilities with a single template yaml file. The exploitation stages of the vulnerabilities here will be added with python scripts and descriptions over time.
-
-- **CVE-2024-5716**: Detects the authentication bypass vulnerability.
-- **CVE-2024-5717**: Detects the command injection vulnerability leading to remote code execution.
-- **CVE-2024-5718**: Detects the missing authentication vulnerability leading to remote code execution.
-- **CVE-2024-5719**: Detects another instance of command injection vulnerability leading to remote code execution.
-- **CVE-2024-5720**: Detects yet another instance of command injection vulnerability leading to remote code execution.
-- **CVE-2024-5721**: Detects another instance of missing authentication vulnerability leading to remote code execution.
-- **CVE-2024-5722**: Detects the HTTP API hard-coded cryptographic key vulnerability leading to remote code execution.
-
 ## Usage
 
 To use these template with Nuclei, follow the example steps below:
