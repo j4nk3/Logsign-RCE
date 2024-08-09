@@ -7,12 +7,11 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize(info = {})
     super(update_info(info,
-      'Name'           => 'Logsign Remote Code Execution',
+      'Name'           => 'Logsign Authentication Bypass',
       'Description'    => %q{
-        This module exploits a vulnerability in the Logsign application that allows
-        an attacker to execute arbitrary code remotely. The vulnerability is identified
-        as CVE-2024-5716 and affects the password reset functionality, where a crafted
-        request can lead to remote code execution.
+        This module allows a malicious attacker in the Logsign application to reset the password of any user's account
+        by performing a brute force on the password reset function. The current user's account can be taken over without interaction.
+        The vulnerability is defined as CVE-2024-5716, and after this attack, access to the logsign management panel, a SIEM and hotspot product, is gained.
       },
       'Author'         => ['Janke'],
       'License'        => MSF_LICENSE,
@@ -21,7 +20,7 @@ class MetasploitModule < Msf::Auxiliary
         ['URL', 'https://www.zerodayinitiative.com/advisories/ZDI-24-616/'],
         ['URL', 'https://www.zerodayinitiative.com/blog/2024/7/1/getting-unauthenticated-remote-code-execution-on-the-logsign-unified-secops-platform']
       ],
-      'DisclosureDate' => '2024-08-01',
+      'DisclosureDate' => '2024-06-03',
       'Platform'       => 'linux',
       'Arch'           => ARCH_PYTHON,
       'Targets'        => [['Automatic', {}]],
