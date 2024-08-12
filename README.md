@@ -1,4 +1,4 @@
-# Logsign Unified SecOps Platform Proof Of Concept (POC) Detection and Exploit
+# Logsign Unified SecOps Platform: Exploiting CVE-2024-5716 to CVE-2024-5722 - Detection, Proof of Concept (PoC), and Exploitation Guide"
 
 ## Explanation:
 
