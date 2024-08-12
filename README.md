@@ -21,8 +21,8 @@ To use these template with Nuclei, follow the example steps below:
 ### Clone the repository:
 
 ```sh
-git clone https://github.com/j4nk3/logsign-unauth-rce.git
-cd logsign-unauth-rce
+git clone https://github.com/j4nk3/Logsign-RCE.git
+cd Logsign-RCE
 ```
 ### Usage with Nuclei:
 
