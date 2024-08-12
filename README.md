@@ -36,11 +36,11 @@ nuclei -l urls.txt -t logsign-unauth-bypass-rce.yaml -nh
 ```
 **Sample Recon and Detection Process:**
 
-<p
+<p>
   <img src="https://github.com/user-attachments/assets/a0759656-9cf9-44cf-9113-87c483303bb4" alt="Recon with Shodan" width="700"/>
 </p>
 <br>
-<p 
+<p>
   <img src="https://github.com/user-attachments/assets/5ea535f3-f9a8-43f3-a65d-3c40783cd8c9" alt="Detection with Nuclei" width="700"/>
 </p>
 
