@@ -28,11 +28,11 @@ cd Logsign-RCE
 
 **Single Target:**
 ```sh
-nuclei -u https://target.com -t logsign-unauth-rce.yaml -nh
+nuclei -u https://target.com -t logsign-unauth-bypass-rce.yaml -nh
 ```
 **Multiple Target:**
 ```sh
-nuclei -l urls.txt -t logsign-unauth-rce.yaml -nh
+nuclei -l urls.txt -t logsign-unauth-bypass-rce.yaml -nh
 ```
 
 ### Usage with Metasploit
