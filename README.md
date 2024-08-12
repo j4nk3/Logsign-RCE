@@ -1,4 +1,4 @@
-# Logsign Unified SecOps Platform Nuclei Template Scanner
+# Logsign Unified SecOps Platform Proof Of Concept (POC) Detection and Exploit
 
 ## Explanation:
 
