@@ -89,6 +89,13 @@ Feel free to submit issues or pull requests if you find any bugs or have suggest
 ## License
 This project is licensed under the MIT License.
 
+## Disclaimer
+This GitHub repository is intended solely for cybersecurity research and educational purposes. The tools, scripts, and information provided here are designed to help security professionals and researchers better understand and improve the security of computer systems and networks.
+
+The repository owner, contributors, and GitHub do not endorse or support any illegal or unethical activities. Any misuse of the materials provided in this repository is strictly the responsibility of the user. The repository owner and contributors will not be held liable for any damage, loss, or legal consequences resulting from the use or misuse of the content in this repository.
+
+By using the content in this repository, you agree to use it responsibly and in compliance with all applicable laws and regulations.
+
 ## References
 [Logsign Support](https://support.logsign.net/hc/en-us/articles/19316621924754-03-06-2024-Version-6-4-8-Release-Notes)<br>
 [Zero Day Inititive](https://www.zerodayinitiative.com/blog/2024/7/1/getting-unauthenticated-remote-code-execution-on-the-logsign-unified-secops-platform)
