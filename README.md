@@ -12,6 +12,8 @@ This repository contains Nuclei template for detecting multiple vulnerabilities 
 - **ZDI-CAN-24169 > CVE-2024-5721**: Logsign Unified SecOps Platform Missing Authentication Remote Code Execution Vulnerability
 - **ZDI-CAN-24170 > CVE-2024-5722**: Logsign Unified SecOps Platform HTTP API Hard-coded Cryptographic Key Remote Code Execution Vulnerability
 
+Notice: The API GET request performed in the detection section is closed on some servers. For this reason, you can manually visit the website and check the version from the homepage. This is important in order not to miss a finding.
+
 The metasploit exploit phase will be updated...
 
 ## Usage
